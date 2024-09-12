@@ -19,3 +19,16 @@ if connection.is_connected():
             """
     cursor.execute(create_table_query)
     print('Table "students" created successfully.')
+    
+    insert_query="""
+              INSERT INTO students (name,age,gender)
+              VALUES(%s, %s, %s)
+              """
+    students_records=[
+                  ('Alice',22,'female'),
+                  ('bob',24,'male'),
+                  ('charlie',23,'male')
+             ]
+    cursor.executemany(insert_query,students_records) 
+    connection.commit()
+    print(f"{cursor.rowcount} records inserted into 'students' table")
